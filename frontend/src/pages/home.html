@@ -1,1 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анализ Состава Косметики</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: linear-gradient(135deg, #f5c7d1, #f8e8e6);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+        .button {
+            background-color: #6fcf97;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            display: inline-block;
+            align-items: center;
+            justify-content: center;
+        }
+        .button:hover {
+            background-color: #57ab78;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        #auth-modal, #register-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 100px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            max-width: 90%;
+            min-width: 400px;
+            text-align: center;
+            height: 600px;
+        }
+        .form-input {
+            width: 70%;
+            padding: 30px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        .auth-input {
+            width: 70%;
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        #profile-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: #6fcf97;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #profile-btn:hover {
+            background-color: #57ab78;
+        }
+        #profile-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            z-index: 100;
+        }
+        #profile-menu button {
+            display: block;
+            background: none;
+            border: none;
+            color: #333;
+            padding: 10px;
+            cursor: pointer;
+            text-align: left;
+        }
+        #profile-menu button:hover {
+            background-color: #f0f0f0;
+        }
+        #main-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .text-bar-container {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        /* Сделаем текстбар для ввода состава косметики больше */
+        #text-area {
+            width: 80%;
+            height: 200px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            resize: vertical;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        /* Кнопки "Войти" и "Зарегистрироваться" внизу модальных окон */
+        #auth-modal .button,
+        #register-modal .button {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
 
+<div id="profile-btn" onclick="toggleProfileMenu()">👤</div>
+
+<div id="profile-menu">
+    <button onclick="openLoginModal()">Войти</button>
+    <button onclick="openRegisterModal()">Зарегистрироваться</button>
+</div>
+
+<div id="main-screen">
+    <h1>Анализ Состава Косметики</h1>
+    <div class="buttons-container">
+        <button class="button" onclick="notWorking()">Загрузить фото</button>
+        <button class="button" onclick="toggleTextBar()">Ввести состав косметики</button>
+    </div>
+    <div class="text-bar-container" id="text-bar" style="display: none;">
+        <textarea id="text-area" placeholder="Введите состав косметики..." class="form-input"></textarea>
+        <button class="button" onclick="submitText()">Отправить</button>
+    </div>
+    <p id="success-message"></p>
+</div>
+
+<!-- Модальное окно для входа -->
+<div id="auth-modal">
+    <button class="modal-close" onclick="closeAuthModal()">✖</button>
+    <h1>Вход в систему</h1>
+    <input type="text" id="username" class="auth-input" placeholder="Имя пользователя">
+    <input type="password" id="password" class="auth-input" placeholder="Пароль">
+    <button class="button" onclick="login()">Войти</button>
+</div>
+
+<!-- Модальное окно для регистрации -->
+<div id="register-modal">
+    <button class="modal-close" onclick="closeRegisterModal()">✖</button>
+    <h1>Регистрация</h1>
+    <input type="text" id="lastname" class="auth-input" placeholder="Фамилия">
+    <input type="text" id="firstname" class="auth-input" placeholder="Имя">
+    <input type="text" id="middlename" class="auth-input" placeholder="Отчество">
+    <input type="text" id="register-username" class="auth-input" placeholder="Имя пользователя">
+    <input type="password" id="register-password" class="auth-input" placeholder="Пароль">
+    <button class="button" onclick="register()">Зарегистрироваться</button>
+</div>
+
+<script>
+    function toggleProfileMenu() {
+        const menu = document.getElementById("profile-menu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    function openLoginModal() {
+        document.getElementById("auth-modal").style.display = "block";
+        toggleProfileMenu();
+    }
+
+    function closeAuthModal() {
+        document.getElementById("auth-modal").style.display = "none";
+    }
+
+    function openRegisterModal() {
+        document.getElementById("register-modal").style.display = "block";
+        toggleProfileMenu();
+    }
+
+    function closeRegisterModal() {
+        document.getElementById("register-modal").style.display = "none";
+    }
+
+    function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        if (username && password) {
+            alert("Вы успешно вошли!");
+            closeAuthModal();
+        } else {
+            alert("Пожалуйста, введите имя пользователя и пароль.");
+        }
+    }
+
+    function register() {
+        alert("Регистрация прошла успешно!");
+        closeRegisterModal();
+    }
+
+    function toggleTextBar() {
+        const textBar = document.getElementById("text-bar");
+        textBar.style.display = textBar.style.display === "none" ? "block" : "none";
+    }
+
+    function submitText() {
+        const text = document.getElementById("text-area").value;
+        if (text) {
+            alert("Состав успешно отправлен!");
+            document.getElementById("text-area").value = "";
+        } else {
+            alert("Пожалуйста, введите состав косметики.");
+        }
+    }
+
+    function notWorking() {
+        alert("Эта функция скоро станет доступна.");
+    }
+</script>
+
+</body>
+</html>
