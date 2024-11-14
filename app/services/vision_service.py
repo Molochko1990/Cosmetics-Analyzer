@@ -1,9 +1,16 @@
+from io import BytesIO
+
+import os
+
 import cv2
 import pytesseract
+import numpy as np
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
-def GetTextFromImage(language, imagePath):
-    image = cv2.imread(imagePath)
+os.environ['TESSDATA_PREFIX'] = r'C:\Program Files\Tesseract-OCR\tessdata'
+
+def GetTextFromImage(language, image_bytes):
+    image = cv2.imdecode(np.frombuffer(BytesIO(image_bytes).read(), np.uint8), cv2.IMREAD_COLOR)
     original_height, original_width = image.shape[:2]
     image = cv2.resize(image, (int(original_width*1.2), int(original_height*1.12)), interpolation=cv2.INTER_LINEAR)
 
@@ -20,6 +27,3 @@ def GetTextFromImage(language, imagePath):
 
 
 #print(GetTextFromImage(1, 'Test-1.jpg'))
-
-
-

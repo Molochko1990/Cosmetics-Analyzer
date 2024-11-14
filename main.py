@@ -14,6 +14,6 @@ async def upload_image(file: UploadFile = File(...)):
 
     image_data = await file.read()
 
-    text_composition = GetTextFromImage(image_data)
+    text_composition = GetTextFromImage(0, image_data)
 
     return {'Состав:': text_composition}
