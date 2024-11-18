@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анализ Состава Косметики</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="profile-btn" onclick="toggleProfileMenu()">👤</div>
+
+<div id="profile-menu">
+    <button onclick="openLoginModal()">Войти</button>
+    <button onclick="openRegisterModal()">Зарегистрироваться</button>
+</div>
+
+<div id="main-screen">
+    <h1>Анализ Состава Косметики</h1>
+    <div class="buttons-container">
+        <button class="button" onclick="notWorking()">Загрузить фото</button>
+        <button class="button" onclick="toggleTextBar()">Ввести состав косметики</button>
+    </div>
+    <div class="text-bar-container" id="text-bar" style="display: none;">
+        <textarea id="text-area" placeholder="Введите состав косметики..." class="form-input"></textarea>
+        <button class="button" onclick="submitText()">Отправить</button>
+    </div>
+    <p id="success-message"></p>
+</div>
+
+<div id="overlay"></div>
+
+<div id="auth-modal">
+    <button class="modal-close" onclick="closeAuthModal()">✖</button>
+    <h1>Вход в систему</h1>
+    <input type="text" id="username" class="auth-input" placeholder="Имя пользователя">
+    <input type="password" id="password" class="auth-input" placeholder="Пароль">
+    <button class="button" onclick="login()">Войти</button>
+</div>
+
+<div id="register-modal">
+    <button class="modal-close" onclick="closeRegisterModal()">✖</button>
+    <h1>Регистрация</h1>
+    <input type="text" id="lastname" class="auth-input" placeholder="Фамилия">
+    <input type="text" id="firstname" class="auth-input" placeholder="Имя">
+    <input type="text" id="middlename" class="auth-input" placeholder="Отчество">
+    <input type="text" id="register-username" class="auth-input" placeholder="Имя пользователя">
+    <input type="password" id="register-password" class="auth-input" placeholder="Пароль">
+    <button class="button" onclick="register()">Зарегистрироваться</button>
+</div>
+
+<script src="scripts.js"></script>
+</body>
+</html>
