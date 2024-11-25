@@ -58,3 +58,35 @@ function submitText() {
 function notWorking() {
     alert("Извините, эта функция пока не работает.");
 }
+
+async function uploadImage() {
+    const fileInput = document.getElementById("image-upload");
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Пожалуйста, выберите изображение.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+        const response = await fetch("http://localhost:8000/upload-image/", {
+            method: "POST",
+            body: formData,
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);  // Просмотр полученных данных в консоли
+            const similarWords = data.message || JSON.stringify(data);  // Преобразование объекта в строку, если это необходимо
+            document.getElementById("similar-words").innerText = "Похожие слова: " + similarWords;
+        } else {
+            alert("Ошибка загрузки изображения.");
+        }
+    } catch (error) {
+        console.error("Ошибка при отправке изображения:", error);
+        alert("Произошла ошибка при загрузке изображения.");
+    }
+}
