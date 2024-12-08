@@ -36,6 +36,7 @@ async def upload_image(file: UploadFile = File(...)):
         processed_text = clean_and_extract(recognized_text)
         id_similar_ingredients = find_similar_ingredients(processed_text)
         ingredient_score = calculate_ingredient_score(id_similar_ingredients)
+        print(id_similar_ingredients)
         cosmetic_risk = determining_cosmetic_risk(id_similar_ingredients)
         similar_ingredients = get_latin_name(id_similar_ingredients)
 
@@ -59,7 +60,9 @@ async def process_user_input(user_input: UserInput):
         processed_text = clean_and_extract(user_input.text)
         id_similar_ingredients = find_similar_ingredients(processed_text)
         ingredient_score = calculate_ingredient_score(id_similar_ingredients)
+        print(id_similar_ingredients)
         cosmetic_risk = determining_cosmetic_risk(id_similar_ingredients)
+
         similar_ingredients = get_latin_name(id_similar_ingredients)
 
         return JSONResponse(

@@ -38,7 +38,6 @@
             <button onclick="openLoginModal()">Войти</button>
             <button onclick="openRegisterModal()">Зарегистрироваться</button>
         </div>
-
         <div class="buttons-container">
             <button class="button" onclick="toggleTextBar()">Отправить состав</button>
         </div>
@@ -48,7 +47,6 @@
             <button class="button" onclick="submitText()">Отправить</button>
             <p id="success-message"></p>
         </div>
-
         <div id="image-upload-container">
             <input type="file" id="image-upload" accept="image/*" />
             <button class="button" id="upload-button">Загрузить изображение</button>
@@ -62,13 +60,14 @@
             </select>
         </div>
 
+
         <div id="result">
             <h2>Результат:</h2>
             <p id="similar-words"></p>
 
             <div id="block1" class="result-block">
                 <div class="block-header">
-                    <h3>Общая оценка продукта</h3>
+                    <h3>Общая оценка опасности продукта по 5 бальной шкале</h3>
                     <button onclick="toggleBlock('block1')" class="toggle-btn">⬇️</button>
                 </div>
                 <div class="block-content" id="block1-content"></div>
@@ -90,6 +89,10 @@
                 <div class="block-content" id="block3-content"></div>
             </div>
         </div>
+
+
+
+
     </div>
 </body>
 </html>

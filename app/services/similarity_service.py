@@ -10,4 +10,5 @@ def find_similar_ingredients(ingredients, threshold=85):
         for word in database:
             if fuzz.ratio(ingredient.lower(), word[1].lower()) > threshold:
                 id_ingredient.append(word[0])
+                break
     return id_ingredient

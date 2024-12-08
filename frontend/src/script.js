@@ -42,8 +42,7 @@ function toggleTextBar() {
     textBar.style.display = textBar.style.display === "none" ? "block" : "none";
 }
 
-// Отправка текста пользователя
-function submitText() {
+async function submitText() {
     const textArea = document.getElementById("text-area");
     const successMessage = document.getElementById("success-message");
 
@@ -52,15 +51,50 @@ function submitText() {
         return;
     }
 
-    successMessage.innerText = `Состав успешно отправлен: ${textArea.value}`;
-    textArea.value = "";
-    alert("Спасибо! Состав отправлен.");
+    // Отправляем текст на сервер
+    try {
+        const response = await fetch("http://localhost:8000/process-user-input/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                text: textArea.value,  // Изменено на "text"
+            }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            // Заполняем блоки данными, полученными от сервера
+            document.getElementById("block1-content").innerText = data.block1 || "Нет данных";
+            document.getElementById("block2-content").innerText = data.block2 || "Нет данных";
+            document.getElementById("block3-content").innerText = Array.isArray(data.block3)
+                ? data.block3.join("\n")
+                : "Нет данных";
+
+            // Показываем блоки
+            document.getElementById("block1").style.display = "block";
+            document.getElementById("block2").style.display = "block";
+            document.getElementById("block3").style.display = "block";
+
+            // Можно показать сообщение об успешной отправке, если нужно
+            successMessage.style.display = "block";
+
+        } else {
+            alert("Ошибка при отправке данных.");
+        }
+    } catch (error) {
+        console.error("Ошибка при отправке текста:", error);
+        alert("Произошла ошибка при отправке текста.");
+    }
 }
 
 // Инициализация событий на загрузке страницы
 document.addEventListener("DOMContentLoaded", function () {
     const uploadButton = document.getElementById("upload-button");
     const fileInput = document.getElementById("image-upload");
+    const submitButton = document.getElementById("submit-button"); // кнопка отправки текста
 
     // Открываем диалог выбора файла при клике на кнопку
     uploadButton.addEventListener("click", function () {
@@ -75,6 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         uploadImage();
     });
+
+    // Добавляем обработчик для кнопки отправки текста
+    submitButton.addEventListener("click", submitText);
 });
 
 
@@ -119,6 +156,7 @@ async function uploadImage() {
         alert("Произошла ошибка при загрузке изображения.");
     }
 }
+
 
 function toggleBlock(blockId) {
     const block = document.getElementById(blockId);
