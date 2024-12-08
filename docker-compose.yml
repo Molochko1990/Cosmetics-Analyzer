@@ -9,22 +9,24 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+      - ./app/db:/app/db  # Монтируем локальную директорию с базой данных в контейнер
     depends_on:
-      - cosmetics_db
+      - cosmetics_db  # Эта строка больше не нужна, так как PostgreSQL не используется
     env_file:
         - .env
     command: ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
-  cosmetics_db:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+  # Удаляем сервис для PostgreSQL, так как мы используем SQLite
+  # cosmetics_db:
+  #   image: postgres:latest
+  #   environment:
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #     POSTGRES_DB: ${POSTGRES_DB}
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  # postgres_data: # Это можно удалить, так как больше не используем PostgreSQL
