@@ -17,6 +17,7 @@ python-levenshtein = "^0.26.1"
 python-multipart = "^0.0.17"
 opencv-python = "^4.7.0.72"
 requests = "^2.32.3"
+python-telegram-bot = "^21.9"
 
 
 [tool.poetry.group.dev.dependencies]
