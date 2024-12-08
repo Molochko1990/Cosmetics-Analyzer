@@ -16,6 +16,7 @@ fuzzywuzzy = "^0.18.0"
 python-levenshtein = "^0.26.1"
 python-multipart = "^0.0.17"
 opencv-python = "^4.7.0.72"
+requests = "^2.32.3"
 
 
 [tool.poetry.group.dev.dependencies]

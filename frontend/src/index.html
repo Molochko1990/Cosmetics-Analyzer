@@ -32,16 +32,18 @@
 
     <div id="main-screen">
         <h1>Cosmetics Analyzer</h1>
+
         <div id="profile-btn" onclick="toggleProfileMenu()">☰</div>
         <div id="profile-menu">
             <button onclick="openLoginModal()">Войти</button>
             <button onclick="openRegisterModal()">Зарегистрироваться</button>
         </div>
+
         <div class="buttons-container">
             <button class="button" onclick="toggleTextBar()">Отправить состав</button>
         </div>
 
-        <div class="text-bar-container" id="text-bar" style="display: none;">
+        <div id="text-bar" class="text-bar-container" style="display: none;">
             <textarea id="text-area" placeholder="Введите состав косметики"></textarea>
             <button class="button" onclick="submitText()">Отправить</button>
             <p id="success-message"></p>
@@ -49,57 +51,45 @@
 
         <div id="image-upload-container">
             <input type="file" id="image-upload" accept="image/*" />
-            <button class="button" onclick="uploadImage()">Загрузить изображение</button>
+            <button class="button" id="upload-button">Загрузить изображение</button>
+        </div>
+
+        <div class="language-selector">
+            <label for="language-switcher">Выберите язык, на котором написан состав</label>
+            <select id="language-switcher" onchange="changeLanguage()">
+                <option value="ru">RU</option>
+                <option value="en">EN</option>
+            </select>
         </div>
 
         <div id="result">
             <h2>Результат:</h2>
             <p id="similar-words"></p>
+
+            <div id="block1" class="result-block">
+                <div class="block-header">
+                    <h3>Общая оценка продукта</h3>
+                    <button onclick="toggleBlock('block1')" class="toggle-btn">⬇️</button>
+                </div>
+                <div class="block-content" id="block1-content"></div>
+            </div>
+
+            <div id="block2" class="result-block">
+                <div class="block-header">
+                    <h3>Общая рекомендация по безопасности продукта</h3>
+                    <button onclick="toggleBlock('block2')" class="toggle-btn">⬇️</button>
+                </div>
+                <div class="block-content" id="block2-content"></div>
+            </div>
+
+            <div id="block3" class="result-block">
+                <div class="block-header">
+                    <h3>Безопасность каждого ингредиента</h3>
+                    <button onclick="toggleBlock('block3')" class="toggle-btn">⬇️</button>
+                </div>
+                <div class="block-content" id="block3-content"></div>
+            </div>
         </div>
     </div>
-<script>
-    async function uploadImage() {
-        const fileInput = document.getElementById("image-upload");
-        const file = fileInput.files[0];
-
-        if (!file) {
-            alert("Пожалуйста, выберите изображение.");
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append("file", file);
-
-        try {
-            const response = await fetch("http://localhost:8000/upload-image/", {
-                method: "POST",
-                body: formData,
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data); // Логирование ответа от сервера
-
-                // Преобразуем объект в строку, перечислив все ингредиенты и их похожие слова
-                let similarWords = '';
-                for (let ingredient in data.message) {
-                    if (data.message.hasOwnProperty(ingredient)) {
-                        similarWords += `${ingredient}: ${data.message[ingredient].join(', ') || 'Нет похожих слов'}\n`;
-                    }
-                }
-
-                // Отображаем полученные данные
-                document.getElementById("similar-words").innerText = "Анализ состава:\n" + similarWords;
-            } else {
-                alert("Ошибка загрузки изображения.");
-            }
-        } catch (error) {
-            console.error("Ошибка при отправке изображения:", error);
-            alert("Произошла ошибка при загрузке изображения.");
-        }
-    }
-</script>
-
-
 </body>
 </html>

@@ -27,17 +27,12 @@ function closeRegisterModal() {
 
 function login() {
     const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
     alert("Добро пожаловать, " + username + "!");
     closeAuthModal();
 }
 
 function register() {
-    const lastname = document.getElementById("lastname").value;
     const firstname = document.getElementById("firstname").value;
-    const middlename = document.getElementById("middlename").value;
-    const username = document.getElementById("register-username").value;
-    const password = document.getElementById("register-password").value;
     alert("Регистрация прошла успешно, " + firstname + "!");
     closeRegisterModal();
 }
@@ -47,17 +42,41 @@ function toggleTextBar() {
     textBar.style.display = textBar.style.display === "none" ? "block" : "none";
 }
 
+// Отправка текста пользователя
 function submitText() {
     const textArea = document.getElementById("text-area");
     const successMessage = document.getElementById("success-message");
-    successMessage.innerText = "Состав успешно отправлен: " + textArea.value;
+
+    if (textArea.value.trim() === "") {
+        alert("Пожалуйста, введите состав перед отправкой.");
+        return;
+    }
+
+    successMessage.innerText = `Состав успешно отправлен: ${textArea.value}`;
     textArea.value = "";
     alert("Спасибо! Состав отправлен.");
 }
 
-function notWorking() {
-    alert("Извините, эта функция пока не работает.");
-}
+// Инициализация событий на загрузке страницы
+document.addEventListener("DOMContentLoaded", function () {
+    const uploadButton = document.getElementById("upload-button");
+    const fileInput = document.getElementById("image-upload");
+
+    // Открываем диалог выбора файла при клике на кнопку
+    uploadButton.addEventListener("click", function () {
+        fileInput.click();
+    });
+
+    // Автоматическая загрузка изображения после выбора файла
+    fileInput.addEventListener("change", function () {
+        if (fileInput.files.length === 0) {
+            alert("Файл не выбран. Попробуйте ещё раз.");
+            return;
+        }
+        uploadImage();
+    });
+});
+
 
 async function uploadImage() {
     const fileInput = document.getElementById("image-upload");
@@ -79,9 +98,19 @@ async function uploadImage() {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);  // Просмотр полученных данных в консоли
-            const similarWords = data.message || JSON.stringify(data);  // Преобразование объекта в строку, если это необходимо
-            document.getElementById("similar-words").innerText = "Похожие слова: " + similarWords;
+
+            // Заполняем блоки данными
+            document.getElementById("block1-content").innerText = data.block1 || "Нет данных";
+            document.getElementById("block2-content").innerText = data.block2 || "Нет данных";
+            document.getElementById("block3-content").innerText = Array.isArray(data.block3)
+                ? data.block3.join("\n")
+                : "Нет данных";
+
+            // Показываем блоки
+            document.getElementById("block1").style.display = "block";
+            document.getElementById("block2").style.display = "block";
+            document.getElementById("block3").style.display = "block";
+
         } else {
             alert("Ошибка загрузки изображения.");
         }
@@ -90,3 +119,19 @@ async function uploadImage() {
         alert("Произошла ошибка при загрузке изображения.");
     }
 }
+
+function toggleBlock(blockId) {
+    const block = document.getElementById(blockId);
+    const content = block.querySelector('.block-content');
+    const btn = block.querySelector('.toggle-btn');
+
+    // Если контент скрыт, показываем его и меняем знак на стрелку вверх
+    if (content.style.display === "none") {
+        content.style.display = "block";
+        btn.textContent = "⬆️";
+    } else {
+        content.style.display = "none";
+        btn.textContent = "⬇️";
+    }
+}
+
