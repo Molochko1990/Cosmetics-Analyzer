@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbbe6378-183a-40dd-83ba-672fb34f8293" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/bot/bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/cosmetic_risk_determining_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/cosmetic_risk_determining_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,20 +45,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.bot.executor": "Run",
-    "Python.cosmetic_risk_determining_service.executor": "Run",
-    "Python.crud.executor": "Run",
-    "Python.ingredient_score.executor": "Run",
-    "Python.similarity_service.executor": "Run",
-    "Python.vision_service.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Kirill__dev",
-    "last_opened_file_path": "/home/kirill/Cosmetics-Analyzer",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.bot.executor&quot;: &quot;Run&quot;,
+    &quot;Python.cosmetic_risk_determining_service.executor&quot;: &quot;Run&quot;,
+    &quot;Python.crud.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ingredient_score.executor&quot;: &quot;Run&quot;,
+    &quot;Python.similarity_service.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vision_service.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Kirill__dev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/kirill/Рабочий стол/Алгоритмы и анализ сложности/Лабораторная 7&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
