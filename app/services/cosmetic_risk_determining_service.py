@@ -5,7 +5,7 @@ URL = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
 
 def determining_cosmetic_risk(ids):
     ingredients = get_latin_name(ids)
-    iam_token = "https://yandex.cloud/ru/docs/iam/operations/iam-token/create"
+    iam_token = "https://yandex.cloud/ru/docs/iam/operations/iam-token/create "
     folder_id = "b1gf3amjf6uujcqkj28e"
     data = {}
     data["modelUri"] = f"gpt://{folder_id}/yandexgpt-lite/latest"

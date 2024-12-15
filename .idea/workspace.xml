@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="dbbe6378-183a-40dd-83ba-672fb34f8293" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/bot/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/db/crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/db/crud.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/services/cosmetic_risk_determining_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/cosmetic_risk_determining_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +48,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Python.!6.executor&quot;: &quot;Run&quot;,
     &quot;Python.bot.executor&quot;: &quot;Run&quot;,
     &quot;Python.cosmetic_risk_determining_service.executor&quot;: &quot;Run&quot;,
     &quot;Python.crud.executor&quot;: &quot;Run&quot;,

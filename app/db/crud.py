@@ -50,7 +50,7 @@ def get_latin_name(ids):
         cursor = connection.cursor()
 
         query = f"""
-        SELECT latin_name
+        SELECT latin_name, danger_factor
         FROM ingredients
         WHERE id IN ({', '.join(map(str, ids))})
         """
@@ -60,8 +60,9 @@ def get_latin_name(ids):
 
         connection.close()
 
-        return [row[0] for row in rows]
+        return [[row[0], row[1]] for row in rows]
 
     except sqlite3.Error as e:
         print(f"Ошибка подключения или выполнения запроса: {e}")
         return None
+
