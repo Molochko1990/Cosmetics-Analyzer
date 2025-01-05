@@ -91,6 +91,3 @@ def create_database(db_name):
     # Сохранение изменений и закрытие соединения
     conn.commit()
     conn.close()
-
-# Создание базы данных
-create_database("ingredients.db")
