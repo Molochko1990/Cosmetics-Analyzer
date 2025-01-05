@@ -15,7 +15,9 @@ WORKDIR /app
 # Устанавливаем Poetry и зависимости
 COPY pyproject.toml poetry.lock /app/
 RUN pip install poetry
-RUN poetry install --no-dev
+RUN poetry install --only main --no-root
+
+
 
 # Копируем код проекта
 COPY . /app/
@@ -24,4 +26,6 @@ COPY . /app/
 
 
 # Запуск приложения с FastAPI через uvicorn
-CMD ["poetry", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Запуск приложения с FastAPI и Telegram-ботом
+CMD ["sh", "-c", "poetry run uvicorn main:app --host 0.0.0.0 --port 8000 & poetry run python bot.py"]
+

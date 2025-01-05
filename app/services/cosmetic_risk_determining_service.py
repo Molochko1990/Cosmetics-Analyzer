@@ -1,32 +1,29 @@
-import requests
-from app.db.crud import get_latin_name
+from app.db.crud import get_danger_factor_and_naturalness
 
-URL = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
+def get_most_dangerous_ingredient(id_ingredients):
+    ingredients = get_danger_factor_and_naturalness(id_ingredients)
+    most_dangerous = None
+    highest_danger_score = -1
 
-def determining_cosmetic_risk(ids):
-    ingredients = get_latin_name(ids)
-    iam_token = "https://yandex.cloud/ru/docs/iam/operations/iam-token/create "
-    folder_id = "b1gf3amjf6uujcqkj28e"
-    data = {}
-    data["modelUri"] = f"gpt://{folder_id}/yandexgpt-lite/latest"
-    data["completionOptions"] = {"temperature": 0.3, "maxTokens": 1000}
-    data["messages"] = [
-        {"role": "system", "text": "Твоя задача проанализировать компоненты и составить топ самых опасных. Твой ответ должен начинаться со слов 'Косметическое средство' опасно или не опасно, 'Самые опасные компоненты это' . Твой ответ должен быть максимум 20 слов"},
-        {"role": "user", "text": f"{ingredients}"},
-    ]
+    for ingredient in ingredients:
+        id, danger_factor, naturalness = ingredient
+        if danger_factor.lower() == 'низкий':
+            danger_value = 1
+        elif danger_factor.lower() == 'средний':
+            danger_value = 2
+        elif danger_factor.lower() == 'высокий':
+            danger_value = 3
+        else:
+            danger_value = 0
+        if naturalness.lower() == 'натуральный':
+            naturalness_value = 1
+        elif naturalness.lower() == 'синтетический':
+            naturalness_value = 2
+        else:
+            naturalness_value = 0
+        total_score = danger_value + naturalness_value
+        if total_score > highest_danger_score:
+            most_dangerous = ingredient
+            highest_danger_score = total_score
 
-    response = requests.post(
-        URL,
-        headers={
-            "Accept": "application/json",
-            "Authorization": f"Bearer {iam_token}"
-        },
-        json=data,
-    ).json()
-
-    return response['result']['alternatives'][0]['message']['text']
-
-
-
-
-
+    return most_dangerous[0]

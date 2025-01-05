@@ -52,13 +52,6 @@
             <button class="button" id="upload-button">Загрузить изображение</button>
         </div>
 
-        <div class="language-selector">
-            <label for="language-switcher">Выберите язык, на котором написан состав</label>
-            <select id="language-switcher" onchange="changeLanguage()">
-                <option value="ru">RU</option>
-                <option value="en">EN</option>
-            </select>
-        </div>
 
 
         <div id="result">
@@ -75,7 +68,7 @@
 
             <div id="block2" class="result-block">
                 <div class="block-header">
-                    <h3>Общая рекомендация по безопасности продукта</h3>
+                    <h3>Самый опасный ингредиент в этом составе</h3>
                     <button onclick="toggleBlock('block2')" class="toggle-btn">⬇️</button>
                 </div>
                 <div class="block-content" id="block2-content"></div>
@@ -83,7 +76,7 @@
 
             <div id="block3" class="result-block">
                 <div class="block-header">
-                    <h3>Безопасность каждого ингредиента</h3>
+                    <h3>Все ингредиенты которые были найдены в базе</h3>
                     <button onclick="toggleBlock('block3')" class="toggle-btn">⬇️</button>
                 </div>
                 <div class="block-content" id="block3-content"></div>

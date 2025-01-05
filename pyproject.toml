@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cosmetics-analyzer"
+name = "Cosmetics-Analyzer"
 version = "0.1.0"
 description = ""
 authors = ["Sasha notebook <es01@bk.ru>"]
@@ -18,6 +18,7 @@ python-multipart = "^0.0.17"
 opencv-python = "^4.7.0.72"
 requests = "^2.32.3"
 python-telegram-bot = "^21.9"
+langdetect = "^1.0.9"
 
 
 [tool.poetry.group.dev.dependencies]
