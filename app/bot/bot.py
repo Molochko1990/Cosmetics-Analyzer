@@ -56,7 +56,7 @@ async def process_text(update: Update, context: CallbackContext):
 
 
 def main():
-    application = Application.builder().token("7542279402:AAHRaeOUB1dixI7ejZuNKTN_CgcasBZ3DfY").build()
+    application = Application.builder().token("").build()
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, process_text))
