@@ -47,16 +47,16 @@ async def process_text(update: Update, context: CallbackContext):
         similar_ingredients = get_latin_name(id_similar_ingredients)
         danger_ingredient_str = " - ".join(cosmetic_risk[0])
         all_ingredients_str = "\n".join([ingredient[0] + " - " + ingredient[1] for ingredient in similar_ingredients])
-        response = f"*Средняя оценка опасности всех ингредиентов:* {ingredient_score} из 5\n*Самый опасный ингредиент в этом составе:*\n{danger_ingredient_str}\n*Все ингредиенты которые были найдены в базе:*\n{all_ingredients_str}"
+        response = f"*Средняя оценка опасности всех ингредиентов:* {ingredient_score} из 5\n\n*Самый опасный ингредиент в этом составе:*\n\n{danger_ingredient_str}\n\n*Все ингредиенты которые были найдены в базе:*\n\n{all_ingredients_str}"
         await update.message.reply_text(response, parse_mode="Markdown")
 
     except Exception as e:
         print(f"Ошибка при обработке текста: {e}")
-        await update.message.reply_text(f"Произошла ошибка. Сервис поддерживает только rus/en языки. Попробуйте ввести сфотагрофировать состав")
+        await update.message.reply_text(f"Произошла ошибка. Сервис поддерживает только rus/en языки. Попробуйте ввести состав заного")
 
 
 def main():
-    application = Application.builder().token("").build()
+    application = Application.builder().token("7542279402:AAHRaeOUB1dixI7ejZuNKTN_CgcasBZ3DfY").build()
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, process_text))

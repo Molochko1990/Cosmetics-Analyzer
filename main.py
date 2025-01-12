@@ -32,6 +32,7 @@ async def upload_image(file: UploadFile = File(...)):
         image_bytes = await file.read()
         recognized_text = await asyncio.to_thread(GetTextFromImage, BytesIO(image_bytes))
         processed_text = clean_and_extract(recognized_text)
+        print(processed_text)
         id_similar_ingredients = find_similar_ingredients_for_image(processed_text)
         ingredient_score = calculate_ingredient_score(id_similar_ingredients)
         id_most_danger_ingredients = get_most_dangerous_ingredient(id_similar_ingredients)
