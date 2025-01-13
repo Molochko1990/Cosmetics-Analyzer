@@ -7,9 +7,11 @@ from app.services.similarity_service import find_similar_ingredients_for_image, 
 from app.services.ingredient_score import calculate_ingredient_score
 from app.services.cosmetic_risk_determining_service import get_most_dangerous_ingredient
 from app.db.crud import get_latin_name
+from app.services.package_cropper import CropImageByPackaging
 import asyncio
 from dotenv import load_dotenv
 import os
+
 
 load_dotenv()
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -21,7 +23,8 @@ async def process_image(update: Update, context: CallbackContext):
     try:
         file = await update.message.photo[-1].get_file()
         image_bytes = await file.download_as_bytearray()
-        recognized_text = await asyncio.to_thread(GetTextFromImage, BytesIO(image_bytes))
+        recognized_text = await asyncio.to_thread(GetTextFromImage, CropImageByPackaging(image_bytes))
+
         processed_text = clean_and_extract(recognized_text)
         id_similar_ingredients = find_similar_ingredients_for_image(processed_text)
         ingredient_score = calculate_ingredient_score(id_similar_ingredients)

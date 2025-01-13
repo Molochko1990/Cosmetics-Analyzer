@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbbe6378-183a-40dd-83ba-672fb34f8293" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/services/package_cropper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pythonProject1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pythonProject1.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/bot/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/vision_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/vision_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,19 +59,20 @@
     "Python.cosmetic_risk_determining_service.executor": "Run",
     "Python.crud.executor": "Run",
     "Python.ingredient_score.executor": "Run",
+    "Python.package_cropper.executor": "Run",
     "Python.similarity_service.executor": "Run",
     "Python.vision_service.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "Kirill__dev",
-    "last_opened_file_path": "/home/kirill/Cosmetics-Analyzer",
+    "last_opened_file_path": "/home/kirill/reviews_api",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/bot" />
+      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>

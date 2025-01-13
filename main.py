@@ -10,7 +10,7 @@ from app.services.cosmetic_risk_determining_service import get_most_dangerous_in
 from app.db.crud import get_latin_name
 import asyncio
 from fastapi.middleware.cors import CORSMiddleware
-
+from app.services.package_cropper import CropImageByPackaging
 app = FastAPI()
 
 app.add_middleware(
@@ -30,9 +30,8 @@ class UserInput(BaseModel):
 async def upload_image(file: UploadFile = File(...)):
     try:
         image_bytes = await file.read()
-        recognized_text = await asyncio.to_thread(GetTextFromImage, BytesIO(image_bytes))
+        recognized_text = await asyncio.to_thread(GetTextFromImage, CropImageByPackaging(image_bytes))
         processed_text = clean_and_extract(recognized_text)
-        print(processed_text)
         id_similar_ingredients = find_similar_ingredients_for_image(processed_text)
         ingredient_score = calculate_ingredient_score(id_similar_ingredients)
         id_most_danger_ingredients = get_most_dangerous_ingredient(id_similar_ingredients)
