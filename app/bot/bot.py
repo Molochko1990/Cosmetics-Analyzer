@@ -58,6 +58,7 @@ async def process_text(update: Update, context: CallbackContext):
 def main():
     application = Application.builder().token(TELEGRAM_TOKEN).build()
 
+
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, process_text))
     application.add_handler(MessageHandler(filters.PHOTO, process_image))
