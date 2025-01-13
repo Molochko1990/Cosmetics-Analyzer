@@ -30,7 +30,7 @@ async def process_image(update: Update, context: CallbackContext):
         similar_ingredients = get_latin_name(id_similar_ingredients)
         danger_ingredient_str = " - ".join(cosmetic_risk[0])
         all_ingredients_str = "\n".join([ingredient[0] + " - " + ingredient[1] for ingredient in similar_ingredients])
-        response = f"*Средняя оценка опасности всех ингредиентов:* {ingredient_score} из 5\n*Самый опасный ингредиент в этом составе:*\n{danger_ingredient_str}\n*Все ингредиенты которые были найдены в базе:*\n{all_ingredients_str}"
+        response = f"*Средняя оценка опасности всех ингредиентов:* {ingredient_score} из 5\n\n*Самый опасный ингредиент в этом составе:*\n\n{danger_ingredient_str}\n\n*Все ингредиенты которые были найдены в базе:*\n\n{all_ingredients_str}"
         await update.message.reply_text(response, parse_mode="Markdown")
     except Exception as e:
         print(f"Ошибка при обработке изображения: {e}")
@@ -53,7 +53,7 @@ async def process_text(update: Update, context: CallbackContext):
 
     except Exception as e:
         print(f"Ошибка при обработке текста: {e}")
-        await update.message.reply_text(f"Произошла ошибка. Сервис поддерживает только rus/en языки. Попробуйте ввести состав заного")
+        await update.message.reply_text(f"Произошла ошибка. Сервис поддерживает только rus/en языки. Попробуйте ввести состав заново")
 
 def main():
     application = Application.builder().token(TELEGRAM_TOKEN).build()
