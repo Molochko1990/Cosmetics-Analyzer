@@ -8,12 +8,14 @@ from app.services.ingredient_score import calculate_ingredient_score
 from app.services.cosmetic_risk_determining_service import get_most_dangerous_ingredient
 from app.db.crud import get_latin_name
 import asyncio
+from dotenv import load_dotenv
+import os
 
-
+load_dotenv()
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 async def start(update: Update, context: CallbackContext):
     await update.message.reply_text("Привет! Отправь изображение или текст, чтобы я мог рассказать больше о безопасности этого косметического средства.")
-
 
 async def process_image(update: Update, context: CallbackContext):
     try:
@@ -34,7 +36,6 @@ async def process_image(update: Update, context: CallbackContext):
         print(f"Ошибка при обработке изображения: {e}")
         await update.message.reply_text(f"Произошла ошибка. Сервис поддерживает только rus/en языки. Попробуйте ввести состав вручную")
 
-
 async def process_text(update: Update, context: CallbackContext):
     try:
         user_text = update.message.text
@@ -54,16 +55,15 @@ async def process_text(update: Update, context: CallbackContext):
         print(f"Ошибка при обработке текста: {e}")
         await update.message.reply_text(f"Произошла ошибка. Сервис поддерживает только rus/en языки. Попробуйте ввести состав заного")
 
-
 def main():
-    application = Application.builder().token("").build()
+    application = Application.builder().token(TELEGRAM_TOKEN).build()
+
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, process_text))
     application.add_handler(MessageHandler(filters.PHOTO, process_image))
 
     application.run_polling()
-
 
 if __name__ == '__main__':
     main()
