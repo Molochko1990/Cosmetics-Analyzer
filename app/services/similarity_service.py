@@ -2,7 +2,7 @@ from fuzzywuzzy import fuzz
 from app.db.crud import get_latin_ingredients_from_db, get_russian_ingredients_from_db
 
 
-def find_similar_ingredients_for_image(ingredients, threshold=75):
+def find_similar_ingredients_for_image(ingredients, threshold=65):
     latin_database = get_latin_ingredients_from_db()
     russian_database = get_russian_ingredients_from_db()
 
