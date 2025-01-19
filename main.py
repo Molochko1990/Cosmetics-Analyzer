@@ -1,6 +1,7 @@
+from fastapi import FastAPI, File, UploadFile, Request
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import JSONResponse
 from io import BytesIO
 from app.services.vision_service import GetTextFromImage
 from app.services.text_processing_service import clean_and_extract
@@ -11,6 +12,7 @@ from app.db.crud import get_latin_name
 import asyncio
 from fastapi.middleware.cors import CORSMiddleware
 from app.services.package_cropper import CropImageByPackaging
+
 app = FastAPI()
 
 app.add_middleware(
@@ -21,9 +23,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.mount("/static", StaticFiles(directory="frontend/src"), name="static")
+
 
 class UserInput(BaseModel):
     text: str
+
+
+@app.get("/")
+async def serve_frontend():
+    return FileResponse("frontend/src/index.html")
 
 
 @app.post("/upload-image/")
